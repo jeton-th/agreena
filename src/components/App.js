@@ -46,8 +46,6 @@ const App = () => {
   }, [])
 
   const onLoad = useCallback((m) => {
-    if (!mapBounds) return
-
     const {
       minLat, maxLat, minLng, maxLng,
     } = mapBounds
@@ -75,7 +73,7 @@ const App = () => {
 
   return (
     <div>
-      {isLoaded
+      {mapBounds && isLoaded
         ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
