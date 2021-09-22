@@ -101,7 +101,7 @@ const App = () => {
         popup={popup}
         setPopup={setPopup}
       />
-    </div>
+    </div >
   )
 }
 
