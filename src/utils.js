@@ -33,7 +33,7 @@ const colorMap = {
   mill: 'orange',
 }
 
-const calculateRadius = (zoom) => 30000
+const calculateRadius = (zoom) => 200000 / Math.pow(2, zoom / 1.5)
 
 export {
   usersURL,
