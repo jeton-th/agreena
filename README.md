@@ -1,9 +1,9 @@
 ## Installation
 
 Run `npm install` to install the dependencies. 
-For the Google Maps integration you will need to create `.env` with the following key
+For the Google Maps integration you will need to create `.env` with the following format
 ```
-REACT_APP_GOOGLE_MAPS_API_KEY=AIzaSyDhslsCNo7ykPML8NNSNdyodynrubTN__I
+REACT_APP_GOOGLE_MAPS_API_KEY=<key>
 ```
 
 ## Requirements / instructions
