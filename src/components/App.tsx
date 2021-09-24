@@ -14,16 +14,18 @@ const containerStyle = {
   width: '100%',
 }
 
+const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ''
+
 const App = () => {
-  const [map, setMap] = useState(null)
-  const [mapBounds, setMapBounds] = useState(null)
+  const [map, setMap] = useState<any | null>(null)
+  const [mapBounds, setMapBounds] = useState<any | null>(null)
   const [circleRadius, setCircleRadius] = useState(30)
-  const [users, setUsers] = useState([])
-  const [popup, setPopup] = useState(null)
+  const [users, setUsers] = useState([] as any[])
+  const [popup, setPopup] = useState<any | null>(null)
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey,
   })
 
   useEffect(() => {
@@ -34,7 +36,9 @@ const App = () => {
         const response = await fetch(usersURL)
         if (response.status === 200) {
           const d = await response.json()
-          setMapBounds(getMapBounds(d))
+          const bounds = getMapBounds(d)
+
+          setMapBounds(bounds)
           setUsers(d)
         }
       } catch (error) {
@@ -99,7 +103,6 @@ const App = () => {
       <Popup
         width={300}
         popup={popup}
-        setPopup={setPopup}
       />
     </div >
   )

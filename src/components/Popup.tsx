@@ -1,8 +1,30 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import '../style/index.css'
 
-const Popup = ({ width, popup }) => {
+interface Props {
+  width: number,
+  popup: {
+    x: number,
+    y: number
+    user: {
+      userTypeIdentifier: string,
+      company: {
+        logoPath: string,
+        name: string,
+        description: string,
+        agricultureTypes: Array<string>,
+        productionTypes: Array<string>,
+      },
+    },
+  }
+}
+
+const defaultProps = {
+  width: 300,
+  popup: null,
+}
+
+const Popup = ({ width, popup }: Props) => {
   let left = 0
   let bottom = 0
   let user
@@ -67,14 +89,6 @@ const Popup = ({ width, popup }) => {
   )
 }
 
-Popup.defaultProps = {
-  width: 300,
-  popup: null,
-}
-
-Popup.propTypes = {
-  width: PropTypes.number,
-  popup: PropTypes.objectOf(PropTypes.shape),
-}
+Popup.defaultProps = defaultProps
 
 export default Popup

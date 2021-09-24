@@ -1,25 +1,39 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Circle } from '@react-google-maps/api'
 import { colorMap } from '../utils'
+
+interface Props {
+  circleRadius: number,
+  setPopup: Function,
+  user: {
+    position: {
+      lat: number,
+      lng: number
+    },
+    listingsCount: number,
+    userTypeIdentifier: string,
+    primaryTradeType: string,
+  }
+}
 
 const Pin = ({
   user,
   circleRadius,
   setPopup,
-}) => {
+}: Props) => {
   const {
     position,
-    listingsCount,
     userTypeIdentifier,
     primaryTradeType,
   } = user
 
-  const color = primaryTradeType
-    ? colorMap[`${userTypeIdentifier}-${primaryTradeType}`]
-    : colorMap[userTypeIdentifier]
+  // get the pin color
+  const tradeType = primaryTradeType
+    ? `${userTypeIdentifier}-${primaryTradeType}`
+    : userTypeIdentifier
+  const color = (colorMap as any)[tradeType]
 
-  const handleClick = (e) => {
+  const handleClick = (e: any) => {
     const x = e.domEvent.clientX
     const y = e.domEvent.clientY
     setPopup({ x, y, user })
@@ -29,7 +43,6 @@ const Pin = ({
     <Circle
       center={position}
       radius={circleRadius}
-      label={listingsCount}
       onClick={handleClick}
       options={{
         strokeWeight: 2,
@@ -44,12 +57,6 @@ const Pin = ({
       }}
     />
   )
-}
-
-Pin.propTypes = {
-  user: PropTypes.objectOf(PropTypes.shape).isRequired,
-  circleRadius: PropTypes.number.isRequired,
-  setPopup: PropTypes.func.isRequired,
 }
 
 export default Pin
