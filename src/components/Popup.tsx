@@ -51,10 +51,14 @@ const Popup = ({ width, popup }: Props) => {
       {user && (
         <div>
           {user.company.logoPath && (
-            <img src={user.company.logoPath} alt={`${user.company.name} logo`} />
+            <img
+              src={user.company.logoPath}
+              alt={`${user.company.name} logo`}
+            />
           )}
 
           <h2>{user.company.name}</h2>
+
           <small className="type">
             {user.userTypeIdentifier.split('_').join(' ')}
           </small>
@@ -82,7 +86,6 @@ const Popup = ({ width, popup }: Props) => {
               <br />
             </>
           )}
-
         </div>
       )}
     </div>
